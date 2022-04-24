@@ -2,7 +2,7 @@
 .vscode
 
 ### Virtual environment
-.env
+env
 
 ### database folder
 .database
