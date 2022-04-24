@@ -1,0 +1,14 @@
+### Editor
+.vscode
+
+### Virtual environment
+.env
+
+### database folder
+.database
+
+### additional files
+*.sql
+*.db
+*.py[cfd]
+*.csv
