@@ -1,0 +1,18 @@
+class COLORS:
+
+    B03 = '#002b36'
+    B02 = '#073642'
+    B01 = '#586e75'
+    B00 = '#657b83'
+    B0 = '#839496'
+    B1 = '#93a1a1'
+    B2 = '#eee8d5'
+    B3 = '#fdf6e3'
+    YELLOW = '#b58900'
+    ORANGE = '#cb4b16'
+    RED = '#dc322f'
+    MAGENTA = '#d33682'
+    VIOLET = '#6c71c4'
+    BLUE = '#268bd2'
+    CYAN = '#2aa198'
+    GREEN = '#859900'
