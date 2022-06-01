@@ -95,6 +95,24 @@ class Ingredients(Database):
         except IndexError:
             Ingredients._logger.info(f'id for {ingredient} not found')
 
+    def q_all() -> sql.Row:
+        '''
+        returns all ingredients
+        '''
+        with sql.connect(Foods._dbpath) as db:
+            db.row_factory = sql.Row
+            db.execute('PRAGMA foreign_keys = ON;')
+            query = (
+                    db.execute(
+                        '''
+                        SELECT ingredient, unit, price_per_unit
+                        FROM ingredients;
+                        '''
+                    ).fetchall()
+                )
+            Foods._logger.info(f'queried all ingredients')
+        return query
+
     # TODO implement something that checks whether an item exists, refactor query so
     # a list can be given and several items queried in one run, if database gets too big
     def by_name(ingredient:str) -> sql.Row:
