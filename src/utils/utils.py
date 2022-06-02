@@ -19,7 +19,7 @@ class Utils:
             print(list(row))
 
     # TODO refactor for a proper method, this one is borrowed from program.Foodlist.makeList
-    def show_ingredients(food:str) -> None:
+    def show_ingredients(food:str) -> dict[str, dict]:
         '''
         shows servings and
         prints all ingredients from a certain food
@@ -39,6 +39,7 @@ class Utils:
         print(db.Foods.by_name(food)['servings'])
         for key, item in tmp_list.items():
             print(f"{key} -> {item['ammount']}{item['unit']}")
+        return tmp_list
 
     def build_list() -> None:
         
