@@ -4,6 +4,8 @@ from tkinter import ttk
 
 from src.database.database import Ingredients
 
+from src.app.colors import COLORS
+
 class IngredientsMenu(tk.Frame):
 
     def select(table:ttk.Treeview, ing:tk.Entry)-> None:
@@ -36,25 +38,54 @@ class IngredientsMenu(tk.Frame):
         ing.delete(0,tk.END)
 
     def __init__(self, parent):
-        super().__init__(parent, bg = 'Blue', padx=10, pady=10)
+        super().__init__(parent)
 
         #### CONTAINERS ####
-        tableContainer = tk.Frame(self, height='600', width='700', bg='Pink', padx=10, pady=10 )
+        tableContainer = tk.Frame(self, height='600', width='700')
 
-        container = tk.Frame(self, height='600', width='300', bg='Green', padx=10, pady=10)
+        container = tk.Frame(self, height='600', width='300', bg=COLORS.B03, padx=10, pady=10)
 
-        newBoxesContainer = tk.Frame(container, bg='Black', padx=10, pady=10)
-        editBoxesContainer = tk.Frame(container, bg='Black', height='50', width='100', padx=10, pady=10)
+        newBoxesContainer = tk.Frame(container,
+            bg=COLORS.B02, 
+            highlightbackground=COLORS.BLUE,
+            highlightthickness=3
+        )
+        editBoxesContainer = tk.Frame(container,
+            bg=COLORS.B02, 
+            highlightbackground=COLORS.MAGENTA,
+            highlightthickness=3
+        )
 
 
         #### OTHER ELEMENTS ####
-        newLabel = tk.Label(container, text='New')
-        editLabel = tk.Label(container, text='Edit')
+        newLabel = tk.Label(container, text='New',
+            bg=COLORS.B03,
+            fg=COLORS.BLUE,
+        )
+        editLabel = tk.Label(container, text='Edit',
+            bg=COLORS.B03,
+            fg=COLORS.MAGENTA,
+        )
 
-        newIngEntry = tk.Entry(newBoxesContainer)
-        newUnitEntry = tk.Entry(newBoxesContainer)
-        newPpuEntry = tk.Entry(newBoxesContainer)
+        newIngEntry = tk.Entry(newBoxesContainer,
+            font=('TkDefaultFont 12'),
+            bg=COLORS.B02,
+            fg=COLORS.B2
+        )
+        newUnitEntry = tk.Entry(newBoxesContainer,
+            font=('TkDefaultFont 12'),
+            bg=COLORS.B02,
+            fg=COLORS.B2
+        )
+        newPpuEntry = tk.Entry(newBoxesContainer,
+            font=('TkDefaultFont 12'),
+            bg=COLORS.B02,
+            fg=COLORS.B2
+        )
         addButton = tk.Button(newBoxesContainer, text='Add',
+            bg=COLORS.B02,
+            activebackground=COLORS.B01,
+            fg=COLORS.B2,
             command=lambda:IngredientsMenu.add(
                 table,
                 newIngEntry,
@@ -64,10 +95,25 @@ class IngredientsMenu(tk.Frame):
             )
         )
 
-        editIngEntry = tk.Entry(editBoxesContainer)
-        editUnitEntry = tk.Entry(editBoxesContainer)
-        editPpuEntry = tk.Entry(editBoxesContainer)
-        saveButton = tk.Button(editBoxesContainer, text='Save', 
+        editIngEntry = tk.Entry(editBoxesContainer,
+            font=('TkDefaultFont 12'),
+            bg=COLORS.B02,
+            fg=COLORS.B2
+        )
+        editUnitEntry = tk.Entry(editBoxesContainer,
+            font=('TkDefaultFont 12'),
+            bg=COLORS.B02,
+            fg=COLORS.B2
+        )
+        editPpuEntry = tk.Entry(editBoxesContainer,
+            bg=COLORS.B02,
+            fg=COLORS.B2,
+            font=('TkDefaultFont 12')
+        )
+        saveButton = tk.Button(editBoxesContainer, text='Save',
+            bg=COLORS.B02,
+            activebackground=COLORS.B01,
+            fg=COLORS.B2, 
             command=lambda:IngredientsMenu.save(
                 table,
                 editIngEntry,
@@ -77,6 +123,9 @@ class IngredientsMenu(tk.Frame):
             )
         )
         rmButton = tk.Button(editBoxesContainer, text='Delete',
+            bg=COLORS.B02,
+            activebackground=COLORS.B01,
+            fg=COLORS.B2,
             command=lambda:IngredientsMenu.rm(
                 table,
                 editIngEntry
@@ -100,25 +149,25 @@ class IngredientsMenu(tk.Frame):
                 ing['price_per_unit']))
 
         #### PACKING ####
-        self.pack(fill='both', expand=True)
-        container.pack(side=tk.RIGHT, fill = 'both', expand=True)
+        
+        container.pack(side=tk.RIGHT, fill = 'both', expand=False)
         tableContainer.pack(fill = 'both', expand=True)
 
         table.pack(fill='both', expand = True, side=tk.TOP)
         table.bind('<Double-1>', lambda x:IngredientsMenu.select(table, editIngEntry))
 
-        newLabel.pack()
-        newBoxesContainer.pack()
-        newIngEntry.pack(side=tk.TOP)
-        newUnitEntry.pack(side=tk.TOP)
-        newPpuEntry.pack(side=tk.TOP)
-        addButton.pack(side=tk.LEFT)
+        newLabel.pack(side=tk.TOP, anchor='w')
+        newBoxesContainer.pack(side=tk.TOP, anchor='w')
+        newIngEntry.pack()
+        newUnitEntry.pack()
+        newPpuEntry.pack()
+        addButton.pack(side=tk.BOTTOM, anchor='w')
 
-        editLabel.pack()
-        editBoxesContainer.pack()
-        editIngEntry.pack(side=tk.TOP)
-        editUnitEntry.pack(side=tk.TOP)
-        editPpuEntry.pack(side=tk.TOP)
-        saveButton.pack(side=tk.LEFT)
-        rmButton.pack(side=tk.LEFT)
+        editLabel.pack(side=tk.TOP, anchor='w')
+        editBoxesContainer.pack(side=tk.TOP, anchor='w')
+        editIngEntry.pack()
+        editUnitEntry.pack()
+        editPpuEntry.pack()
+        saveButton.pack(side=tk.BOTTOM, anchor='w')
+        rmButton.pack(side=tk.BOTTOM, anchor='w')
 
