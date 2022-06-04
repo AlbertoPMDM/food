@@ -25,7 +25,7 @@ class IngredientsWindow(tk.Toplevel):
         Foods.addTo(float(amt.get()), ing.get(), food)
         table.insert('', tk.END, values = (
                 ing.get(),
-                int(amt.get()),
+                float(amt.get()),
             )
         )
         ing.delete(0,tk.END)
